@@ -75,7 +75,7 @@ public class QuestionsLoader extends RecyclerView.Adapter<QuestionsLoader.Questi
         holder.button.setText(Character.toString(option_letter));          //for radio question
         holder.optionContentView.setText(optionContent);
         if (holder.button !=null)
-        { optionRadioGroup.addRadio(holder.button);}
+        { optionRadioGroup.addRadio(holder.button,holder.optionContentView,holder.itemOptionCard);}
         else
             Log.d("#", "addRadio: cardview is null");
 
@@ -99,14 +99,16 @@ public class QuestionsLoader extends RecyclerView.Adapter<QuestionsLoader.Questi
         OptionRadioGroup(){
             selectedListener.setCheckedId(CheckedId);
         }
-        void addRadio(Button optionButton){    //为button设置单选功能
+        void addRadio(Button optionButton,TextView optionContentView,CardView itemOptionCard){    //为button设置单选功能
 
                 optionButton.setId(optionId);
+//                optionContentView.setId(optionId);
 //                optionButton.findViewWithTag("single_button").setId(optionId);
                 optionButton.setOnClickListener(selectedListener);
+                optionContentView.setOnClickListener(selectedListener);
+                itemOptionCard.setOnClickListener(selectedListener);
                 Log.d("#", "#addRadio: " + optionId + "the getId is " + optionButton.getId());
                 optionId++;
-
 //            if (button.isChecked()) {
 //                mProtectFromCheckedChange = true;
 //                if (CheckedId != -1) {
@@ -141,6 +143,8 @@ public class QuestionsLoader extends RecyclerView.Adapter<QuestionsLoader.Questi
 
         boolean IsSingle;
         int CheckedId;
+        Button checkingButton;
+        Button checkedButton;
         SelectedListener(boolean IsSingle){
             this.IsSingle = IsSingle;
         }
@@ -150,12 +154,13 @@ public class QuestionsLoader extends RecyclerView.Adapter<QuestionsLoader.Questi
         }
         @Override
         public void onClick(View v) {
-
             Log.d("#", "#onClick: "+CheckedId);
             if (IsSingle){
+                /*我给button，textview，cardview都监听了，无法判断是否点击了重复的按钮,although i doubt that should set so many Listeners?
+                */
 //                if (v instanceof CardView) {
                     if (CheckedId != -1) {
-                        Button checkedButton = loadedView.findViewById(CheckedId);
+                         checkedButton = loadedView.findViewById(CheckedId);
                         if (checkedButton != null) {
                             setSelectedState(checkedButton, false);
                         } else
@@ -163,12 +168,26 @@ public class QuestionsLoader extends RecyclerView.Adapter<QuestionsLoader.Questi
 
                     }
                     Log.d("#", "onClick: checked over"+CheckedId);
-                Button checkingButton;
+                checkingButton=null;
                     if (v instanceof Button) {
                         checkingButton = (Button) v;
-                        setSelectedState(checkingButton, true);
-                        CheckedId = checkingButton.getId();
                     }
+                    else if (v instanceof TextView){
+                        View p_view=(View)v.getParent();
+                        Log.d("#", "onClick: "+p_view);
+                        checkingButton=p_view.findViewWithTag("single_button");
+                        Log.d("#", "onClick: checkingButton"+checkingButton);
+
+                    }
+                    else if (v instanceof CardView) {
+                        checkingButton=v.findViewWithTag("single_button");
+                    }
+                if (checkingButton!=null){
+                    setSelectedState(checkingButton, true);
+                    Log.d("#", "onClick:parent "+checkingButton.getParent());
+                    CheckedId = checkingButton.getId();
+
+                }
 //                    Button checkingButton =  v.findViewWithTag("single_button");
 
                     Log.d("#", "onClick: checrckedId"+CheckedId+"hello"+i);

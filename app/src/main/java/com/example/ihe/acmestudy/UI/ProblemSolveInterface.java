@@ -36,6 +36,7 @@ public class ProblemSolveInterface extends AppCompatActivity{
     boolean IS_SELECTED=false;
     private long recordingTime = 0;// 记录下来的总时间
     List<View> pages;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,11 +52,12 @@ public class ProblemSolveInterface extends AppCompatActivity{
         optionContentList.add("1+1=3");
         optionContentList.add("1+1=4");
         optionContentList.add("1-1=2");
-        String questionStemContent="下列正确的是？";
+        String questionStemContent="下列正确的是？这些问题都跟哲学有关。\n" +
+                "All these questions relate to philosophy";
 
         //加载试题
-
         View view= LayoutInflater.from(getContext()).inflate(R.layout.questions_container_layout,null);
+        View view1= LayoutInflater.from(getContext()).inflate(R.layout.multiple_choice_question_layout,null);
 
         pages= new ArrayList<>();
         if (view!=null) {
@@ -77,17 +79,10 @@ public class ProblemSolveInterface extends AppCompatActivity{
             Toast.makeText(getContext(),"error",Toast.LENGTH_LONG).show();
 
         pages.add(view);
-        pages.add(view);
+        pages.add(view1);
         PageLoader pageLoader = new PageLoader(pages);
         ViewPager viewPager = findViewById(R.id.card_pager);
         viewPager.setAdapter(pageLoader);
-
-
-
-
-
-
-
 
 
 
@@ -114,12 +109,11 @@ public class ProblemSolveInterface extends AppCompatActivity{
         PSIListener psiListener=new PSIListener();
         like_btn.setOnClickListener(psiListener);
         recordChronometer.setOnClickListener(psiListener);
+        viewPager.addOnPageChangeListener(psiListener);
 
-
-
-
-
-
+    }
+    //从数据获取模块获取相应的试题加载在试题容器（如recycleview，textview等等）
+    private void acquireQuestionsLoadIntoViews(){
 
     }
     /*为计时所准备的函数*/
@@ -135,15 +129,14 @@ public class ProblemSolveInterface extends AppCompatActivity{
         recordingTime = 0;
         recordChronometer.setBase(SystemClock.elapsedRealtime());
     }
-
-    class PSIListener implements View.OnClickListener{
-
+/*一个监听所有控件（chronometer，like_btn,viewpager）的类*/
+    class PSIListener implements View.OnClickListener,ViewPager.OnPageChangeListener {
+//监听所有点击事件的方法
         @Override
         public void onClick(View v) {
             if (v.getId()==like_btn.getId())
             {
                 like_btn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                like_btn.setBackgroundResource(getResources().get);
                 if (!IS_SELECTED){
                 like_btn.setImageResource(R.drawable.like_img);
                 IS_SELECTED=true;
@@ -152,38 +145,42 @@ public class ProblemSolveInterface extends AppCompatActivity{
                     like_btn.setImageResource(R.drawable.ic_favorite_border);
                     IS_SELECTED=false;
                 }
-
             }
             else if (v.getId()== recordChronometer.getId())
             {
-                onRecordPause();//暂停计时
+                onRecordPause();
                 PSIDialogFragment psiDialogFragment=new PSIDialogFragment();
-//                psiDialog.show();
                 AlertDialog dialog = new AlertDialog.Builder(ProblemSolveInterface.this)
-
-                        //设置对话框的标题
-                        .setMessage("    休息一下")//设置对话框的内容
-                        //设置对话框的按钮
+                        .setMessage("    休息一下")
                         .setNeutralButton("    继续做题", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
-                                onRecordStart();  //继续计时
+                                onRecordStart();
                             }
 
 
                         }).create();
                 dialog.show();
-
-                Toast.makeText(getApplicationContext(),"you click a dialog",Toast.LENGTH_LONG).show();
             }
+        }
+/*监听pageChange事件
+* 翻页后，progressbar，答题卡界面，like_btn都要做出相应的改变*/
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-//            switch (v.getId()){
-////                case like_btn.getId():
-//
-//            }
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+        if (state==ViewPager.SCROLL_STATE_IDLE){
 
         }
     }
+}
 
 }

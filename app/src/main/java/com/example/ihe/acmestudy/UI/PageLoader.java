@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 
 import java.util.List;
 //填充每个页面，根据传输的数据，决定在什么位置，加载多少的选择题，填空题页面......
+/*
+* 加载所有view到viewpager里，但不做初始化工作*/
 
 public class PageLoader extends PagerAdapter {
     private List<View> pageItemsList;

@@ -10,10 +10,10 @@
     >
 
 
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <Button
             android:id="@+id/option"
             android:layout_width="35dp"
@@ -33,15 +33,14 @@
             android:layout_marginTop="9dp"
             android:layout_marginEnd="9dp"
             android:layout_marginRight="9dp"
-
+            android:padding="10dp"
             android:layout_marginBottom="9dp"
-            android:layout_toEndOf="@+id/option"
-            android:layout_toRightOf="@+id/option"
             android:fontFamily="sans-serif"
             android:tag="single_text"
             android:text="@string/appbar_scrolling_view_behavior"
             android:textSize="15sp" />
-    </RelativeLayout>
+    </LinearLayout>
+    <!--我超级搞不明白，把relative换成linear，button与text在运行时就没有重叠在一起了？-->
 
 
 </android.support.v7.widget.CardView>
