@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.ihe.acmestudy.Cache.QuestionForDB;
 import com.example.ihe.acmestudy.Compatibility.AcmeContext;
 import com.example.ihe.acmestudy.R;
 
@@ -20,19 +21,29 @@ import java.util.List;
 
 //根据PageLoader传来的试题类型信息，与cache传来的题目，加载相应的试题项
 public class QuestionsLoader extends RecyclerView.Adapter<QuestionsLoader.QuestionHolder> {
-    private List<String> optionContentList = new ArrayList<>(); //选择题的list
-    private static int i=0;
-    private View loadedView;
-    private boolean IsSingle;
+    private List<String> optionContentList; //选择题的list
+    private View loadedView; //使用这个QuestionLoader的view
+    private int type;
     private char option_letter='A';
-    private OptionRadioGroup optionRadioGroup;
-    QuestionsLoader(boolean IsSingle, List<String> optionContentList, RecyclerView recyclerView) {
-        this.IsSingle = IsSingle;
+    private  int optionId =1; //单选按钮id
+    private OptionSelectedListener optionSelectedListener;
+    QuestionsLoader(int type, List<String> optionContentList, RecyclerView recyclerView) {
+        Log.d("#", "QL start");
+        this.type = type;
         this.optionContentList =optionContentList;
         loadedView=recyclerView;     //?我很不想把RV直接传进去，但我现在不知道还有什么更好的办法没有
-        if (IsSingle){
-             optionRadioGroup =new OptionRadioGroup();
+
+        if (type==QuestionForDB.SINGLE_CHOICE){
+            optionSelectedListener=new OptionSelectedListener(true,loadedView,getItemCount());
         }
+        else if (type==QuestionForDB.MULTIPLE_CHOICE){
+            optionSelectedListener=new OptionSelectedListener(false,loadedView,getItemCount());
+        }
+        else if (type==QuestionForDB.GAP_FILLING){
+
+        }
+        Log.d("#", "QL end");
+
     }
 
     static class QuestionHolder extends RecyclerView.ViewHolder {
@@ -41,161 +52,58 @@ public class QuestionsLoader extends RecyclerView.Adapter<QuestionsLoader.Questi
         CardView itemOptionCard;
         QuestionHolder(View itemView) {
             super(itemView);
+            Log.d("#", "QH start");
             button = itemView.findViewById(R.id.option);
             optionContentView = itemView.findViewById(R.id.option_content);
             itemOptionCard=itemView.findViewById(R.id.single_choice_card);
-            Log.d("#", "QuestionHolder: " + itemView+itemView.getId());
-            Log.d("#", "QuestionHolder: " + itemOptionCard+itemOptionCard.getId());
-
-//            if (itemView instanceof CardView) {
-//                itemOptionCard = (CardView) itemView;
-//
-////            if (itemView instanceof CardView) {
-////
-//                if (itemOptionCard == null) {
-//                    Log.d("#", " find cardView is null");
-//                }
-////                i++;
-////                Log.d("#", "QuestionHolder: " + i);
-////            }
-//            }
+            Log.d("#", "QH end");
         }
     }
     @NonNull
     @Override
     public QuestionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.single_choice_question_layout,parent,false);
-        QuestionHolder questionHolder=new QuestionHolder(view);
-        return questionHolder;
+        Log.d("#", "onCreateViewHolder: ");
+        View view=null;
+        if (type==QuestionForDB.SINGLE_CHOICE) {
+             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_choice_question_layout, parent, false);
+        }
+        else if (type==QuestionForDB.MULTIPLE_CHOICE){
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.multiple_choice_question_layout, parent, false);
+        }
+        if (view==null)
+            Log.d("#", "onCreateViewHolder: null view");
+        return new QuestionHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull QuestionHolder holder, int position) {
-        String optionContent=optionContentList.get(position);
-        holder.button.setText(Character.toString(option_letter));          //for radio question
-        holder.optionContentView.setText(optionContent);
-        if (holder.button !=null)
-        { optionRadioGroup.addRadio(holder.button,holder.optionContentView,holder.itemOptionCard);}
-        else
-            Log.d("#", "addRadio: cardview is null");
+        if (type==QuestionForDB.GAP_FILLING){
 
-//        Log.d("#", "#onBindViewHolder: "+holder.itemView);
-//        if (holder.itemOptionCard !=null)
-//        { optionRadioGroup.addRadio(holder.itemOptionCard);}
-//        else
-//            Log.d("#", "addRadio: cardview is null");
-        option_letter++;
+        }else{
+            loadEachButton(holder.button,holder.optionContentView,holder.itemOptionCard,position);
+        }
     }
 
     @Override
     public int getItemCount() {
         return optionContentList.size();
     }
-
-    private class OptionRadioGroup {
-        private int CheckedId =-1;//被选择按钮的id
-        private  int optionId =1; //单选按钮id
-        private SelectedListener selectedListener=new SelectedListener(true);
-        OptionRadioGroup(){
-            selectedListener.setCheckedId(CheckedId);
-        }
-        void addRadio(Button optionButton,TextView optionContentView,CardView itemOptionCard){    //为button设置单选功能
+        //为button设置单选功能
+        private void loadEachButton(Button optionButton, TextView optionContentView, CardView itemOptionCard, int position){
+                String optionContent=optionContentList.get(position);
 
                 optionButton.setId(optionId);
-//                optionContentView.setId(optionId);
-//                optionButton.findViewWithTag("single_button").setId(optionId);
-                optionButton.setOnClickListener(selectedListener);
-                optionContentView.setOnClickListener(selectedListener);
-                itemOptionCard.setOnClickListener(selectedListener);
-                Log.d("#", "#addRadio: " + optionId + "the getId is " + optionButton.getId());
+                optionButton.setText(Character.toString(option_letter));
+                optionContentView.setText(optionContent);
                 optionId++;
-//            if (button.isChecked()) {
-//                mProtectFromCheckedChange = true;
-//                if (CheckedId != -1) {
-//                    setCheckedStateForButton(CheckedId, false);
-//                }
-//                mProtectFromCheckedChange = false;
-//                setCheckedId(button.getId());
-//            }
+                option_letter++;
+
+            optionButton.setOnClickListener(optionSelectedListener);
+            optionContentView.setOnClickListener(optionSelectedListener);
+            itemOptionCard.setOnClickListener(optionSelectedListener);
         }
-//        private void setCheckedStateForButton(int optionId, boolean checked) {
-//            View checkedView = findViewById(optionId);
-//            if (checkedView != null && checkedView instanceof Button) {
-//                ((Button) checkedView).setChecked(checked);
-//            }
-//
-//
-//
-//    }
-    }
 
-    private void setSelectedState(Button button, boolean selectedState){
-        if (selectedState){
-            button.setBackgroundResource(R.drawable.circle);
-            button.setTextColor(ContextCompat.getColor(AcmeContext.getContext(),R.color.colorText));
-        }
-        else {
-            button.setBackgroundResource(R.drawable.circle__pressed);
-            button.setTextColor(ContextCompat.getColor(AcmeContext.getContext(),R.color.colorPrimaryDark));
-        }
-    }
-    private class SelectedListener implements OnClickListener{
 
-        boolean IsSingle;
-        int CheckedId;
-        Button checkingButton;
-        Button checkedButton;
-        SelectedListener(boolean IsSingle){
-            this.IsSingle = IsSingle;
-        }
-        //如果是单选按钮
-        void setCheckedId(int checkedId) {
-            CheckedId = checkedId;
-        }
-        @Override
-        public void onClick(View v) {
-            Log.d("#", "#onClick: "+CheckedId);
-            if (IsSingle){
-                /*我给button，textview，cardview都监听了，无法判断是否点击了重复的按钮,although i doubt that should set so many Listeners?
-                */
-//                if (v instanceof CardView) {
-                    if (CheckedId != -1) {
-                         checkedButton = loadedView.findViewById(CheckedId);
-                        if (checkedButton != null) {
-                            setSelectedState(checkedButton, false);
-                        } else
-                            Log.d("#", "onClick: checkedButton is null");
 
-                    }
-                    Log.d("#", "onClick: checked over"+CheckedId);
-                checkingButton=null;
-                    if (v instanceof Button) {
-                        checkingButton = (Button) v;
-                    }
-                    else if (v instanceof TextView){
-                        View p_view=(View)v.getParent();
-                        Log.d("#", "onClick: "+p_view);
-                        checkingButton=p_view.findViewWithTag("single_button");
-                        Log.d("#", "onClick: checkingButton"+checkingButton);
-
-                    }
-                    else if (v instanceof CardView) {
-                        checkingButton=v.findViewWithTag("single_button");
-                    }
-                if (checkingButton!=null){
-                    setSelectedState(checkingButton, true);
-                    Log.d("#", "onClick:parent "+checkingButton.getParent());
-                    CheckedId = checkingButton.getId();
-
-                }
-//                    Button checkingButton =  v.findViewWithTag("single_button");
-
-                    Log.d("#", "onClick: checrckedId"+CheckedId+"hello"+i);
-                    i++;
-
-                }
-//            }
-        }
-    }
 
 }

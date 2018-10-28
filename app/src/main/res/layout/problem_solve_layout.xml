@@ -7,10 +7,13 @@
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
+        android:paddingTop="9dp"
+        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
 
         <android.support.design.widget.CollapsingToolbarLayout
+            android:fitsSystemWindows="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="?attr/colorPrimary"
@@ -18,6 +21,7 @@
             app:toolbarId="@+id/toolbar_head">
 
             <android.support.v7.widget.Toolbar
+                android:fitsSystemWindows="true"
                 android:id="@+id/toolbar_head"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize">
@@ -27,12 +31,14 @@
                     android:layout_height="match_parent">
 
                     <ImageButton
+                        android:id="@+id/toggle_answer_sheet_button"
                         android:layout_width="20dp"
                         android:layout_height="26dp"
                         android:layout_toLeftOf="@+id/chronometer"
                         android:layout_margin="12dp"
-                       android:background="@drawable/answer_sheet_img"
-                        />
+                        android:background="@drawable/answer_sheet_img"
+                        android:layout_toStartOf="@+id/chronometer"
+                         />
 
                     <Chronometer
                         android:id="@+id/chronometer"
@@ -52,26 +58,27 @@
     </android.support.design.widget.AppBarLayout>
 
     <ProgressBar
-        app:layout_constraintBottom_toBottomOf="@id/appbar"
+        app:layout_constraintTop_toBottomOf="@id/appbar"
         android:id="@+id/progressBar"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:progress="10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/question_stem_container"
-        app:layout_constraintBottom_toBottomOf="@+id/progressBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <!--<android.support.v7.widget.CardView-->
+        <!--android:id="@+id/question_stem_container"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/progressBar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
 
-        >
+        <!--&gt;-->
 
-        <TextView
-            android:id="@+id/stem_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <!--<TextView-->
+            <!--android:id="@+id/stem_view"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
 
-    </android.support.v7.widget.CardView>
+    <!--</android.support.v7.widget.CardView>-->
 
     <!--<include-->
     <!--layout="@layout/questions_container_layout"-->
@@ -87,7 +94,7 @@
         android:id="@+id/card_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/question_stem_container">
+        app:layout_constraintTop_toBottomOf="@+id/appbar">
 
     </android.support.v4.view.ViewPager>
 
