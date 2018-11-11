@@ -19,8 +19,8 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_margin="9dp"
-            android:background="@drawable/circle__pressed"
             android:tag="single_button"
+            android:background="@drawable/circle__pressed"
             android:textSize="20sp" />
 
         <TextView

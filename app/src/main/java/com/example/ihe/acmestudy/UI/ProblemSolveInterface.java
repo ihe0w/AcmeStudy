@@ -10,26 +10,22 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.example.ihe.acmestudy.Cache.QuestionForDB;
+import com.example.ihe.acmestudy.Cache.Questions.CacheManager;
+import com.example.ihe.acmestudy.DataAcquire.QuestionSetJsonParser;
+import com.example.ihe.acmestudy.DataProcess.tempBuildQuestionManager;
 import com.example.ihe.acmestudy.R;
+import com.example.ihe.acmestudy.UI.gapfilling.GapFillingView;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.example.ihe.acmestudy.Compatibility.AcmeContext.getContext;
 
 public class ProblemSolveInterface extends AppCompatActivity{
     FloatingActionButton like_btn;
@@ -38,6 +34,7 @@ public class ProblemSolveInterface extends AppCompatActivity{
     ProgressBar progressBar;
     ImageButton toggleAnswerSheetButton;
     ViewPager viewPager;
+    QuestionSetJsonParser questionSetJsonParser;
 
     private long recordingTime = 0;// 记录下来的总时间
     List<View> pages;
@@ -61,37 +58,19 @@ public class ProblemSolveInterface extends AppCompatActivity{
         }
 
 
-        //获取试题内容
+        //解析并获取试题内容
         psiPageItemViewLoader=new PSIPageItemViewLoader(ProblemSolveInterface.this);
-        pages=psiPageItemViewLoader.loadQuestionIntoViews();
-//        List<String> optionContentList =new ArrayList<>();
-//        optionContentList.add("1+1=2");
-//        optionContentList.add("1+1=3");
-//        optionContentList.add("1+1=4");
-//        optionContentList.add("1-1=2");
-//        String questionStemContent="下列正确的是？这些问题都跟哲学有关。\n" +
-//                "All these questions relate to philosophy";
-        //加载试题
-//        View view= LayoutInflater.from(getContext()).inflate(R.layout.questions_container_layout,null);
-//        View view1= LayoutInflater.from(getContext()).inflate(R.layout.multiple_choice_question_layout,null);
-//
-//        pages= new ArrayList<>();
-//        if (view!=null) {
-//            RecyclerView recyclerView = view.findViewById(R.id.question_container);
-//            QuestionsLoader questionsLoader = new QuestionsLoader(QuestionForDB.SINGLE_CHOICE, optionContentList, recyclerView);
-//            recyclerView.setAdapter(questionsLoader);
-//            recyclerView.setLayoutManager(new LinearLayoutManager(ProblemSolveInterface.this));
-//            TextView questionStemView = findViewById(R.id.stem_view);
-//            if (questionStemView != null)
-//                questionStemView.setText(questionStemContent);
-//            else
-//                Log.d("#", "onCreate: nothing");
-//
-//        }
-//        else
-//            Toast.makeText(getContext(),"error",Toast.LENGTH_LONG).show();
-//        pages.add(view);
-//        pages.add(view1);
+        questionSetJsonParser=new QuestionSetJsonParser();
+
+        pages=psiPageItemViewLoader.loadQuestionIntoViews(questionSetJsonParser.getQuestionPacket());
+//        pages=psiPageItemViewLoader.loadQuestionIntoViews(new CacheManager().getQuestionPacket());
+        for (View view:pages){
+            Log.d("#", "onCreate: "+view+" id is "+view.getId());
+            if (view instanceof GapFillingView){
+                Log.d("#", "onCreate: gap is rel ");
+            }
+        }
+
         isLikeSet =new boolean[pages.size()];
         //加载pagerView item
         PageLoader pageLoader = new PageLoader(pages);

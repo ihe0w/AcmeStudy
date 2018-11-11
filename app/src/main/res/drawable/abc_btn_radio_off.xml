@@ -2,10 +2,10 @@
 <vector
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:name="btn_radio_to_off_mtrl"
-    android:width="32dp"
-    android:viewportWidth="32"
-    android:height="32dp"
-    android:viewportHeight="32">
+    android:width="35dp"
+    android:viewportWidth="35"
+    android:height="35dp"
+    android:viewportHeight="35">
     <group
         android:name="btn_radio_to_off_mtrl_0"
         android:translateX="16"
@@ -16,7 +16,6 @@
                 android:name="ring_outer_path"
                 android:strokeColor="#FF000000"
                 android:strokeWidth="2"
-                
                 android:pathData="M 0.0,-9.0 c 4.9705627482,0.0 9.0,4.0294372518 9.0,9.0 c 0.0,4.9705627482 -4.0294372518,9.0 -9.0,9.0 c -4.9705627482,0.0 -9.0,-4.0294372518 -9.0,-9.0 c 0.0,-4.9705627482 4.0294372518,-9.0 9.0,-9.0 Z" />
         </group>
         <!--<group-->

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/page_layout">
+    android:id="@+id/choice_question_page_layout">
         <android.support.v7.widget.CardView
             android:id="@+id/question_stem_container"
             android:layout_width="match_parent"

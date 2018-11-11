@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<litepal>
+    <dbname value="QuestionForDBSet" >
+
+    </dbname>
+    <version value="1">
+
+    </version>
+    <list>
+        <mapping class="com.example.ihe.acmestudy.Cache.Questions.QuestionForDBAgent">
+
+        </mapping>
+        <mapping class="com.example.ihe.acmestudy.Cache.Questions.SingleChoiceQuestion">
+
+        </mapping>
+        <mapping class="com.example.ihe.acmestudy.Cache.Questions.MultipleChoiceQuestion">
+
+        </mapping>
+        <mapping class="com.example.ihe.acmestudy.Cache.Questions.GapFillingQuestion">
+
+        </mapping>
+    </list>
+</litepal>

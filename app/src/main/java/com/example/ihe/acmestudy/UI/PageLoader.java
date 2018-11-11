@@ -3,6 +3,7 @@ package com.example.ihe.acmestudy.UI;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -27,6 +28,7 @@ public class PageLoader extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
+        Log.d("#", "instantiateItem:  the parent is "+pageItemsList.get(position).getParent()+" it is "+pageItemsList.get(position));
         container.addView(pageItemsList.get(position));
         return pageItemsList.get(position);
     }

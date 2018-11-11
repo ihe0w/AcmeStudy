@@ -1,4 +1,4 @@
 package com.example.ihe.acmestudy.Cache;
 
-public class CacheManager {
+public class CacheLoader {
 }

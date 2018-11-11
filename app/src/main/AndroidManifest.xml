@@ -11,6 +11,7 @@
         android:theme="@style/AppTheme"
         android:name=".Compatibility.AcmeContext">
         <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

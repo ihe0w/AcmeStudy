@@ -96,4 +96,11 @@ public class OptionSelectedListener implements View.OnClickListener {
             onClickEventWHenMultiple();
         }
     }
+
+    public int getAnswerId(){
+        return CheckedId;
+    }
+    public boolean[] getMultipleCheckedIds(){
+        return CheckedIdsWhenMultiple;
+    }
 }
