@@ -55,10 +55,11 @@ class PSIPageItemViewLoader {
                 questionStemView.setText(questionStemContent);
             }
 
-            RecyclerView recyclerView = view.findViewById(R.id.question_container);
-            ChoiceQuestionsLoader choiceQuestionsLoader = new ChoiceQuestionsLoader(type, optionContentList, recyclerView);
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(choiceQuestionsLoader);}
+            ChoiceQuestionView choiceQuestionView = view.findViewById(R.id.question_container);
+            choiceQuestionView.setType(type);
+            ChoiceQuestionsLoader choiceQuestionsLoader = new ChoiceQuestionsLoader(type, optionContentList, choiceQuestionView);
+            choiceQuestionView.setLayoutManager(new LinearLayoutManager(context));
+            choiceQuestionView.setAdapter(choiceQuestionsLoader);}
         return view;
     }
     private View createAndLoadIntoGapFillingView(String gapFillingQuestionStem,List<GapFillingSpanAnswerRange> rangeList){

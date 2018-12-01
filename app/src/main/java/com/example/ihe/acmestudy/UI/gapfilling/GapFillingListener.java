@@ -24,22 +24,24 @@ import com.example.ihe.acmestudy.R;
 import java.util.ArrayList;
 import java.util.List;
 
-class GapFillingListener {
+public class GapFillingListener {
     private GapFillingView gapFillingView;
     private Context context;
     private List<String> answerList;
-
+    private int blankSize;
     GapFillingListener(GapFillingView gapFillingView){
         this.gapFillingView = gapFillingView;
         context= gapFillingView.context;
         answerList = new ArrayList<>();
-        for (int i = 0; i < gapFillingView.rangeList.size(); i++) {
+        blankSize=gapFillingView.rangeList.size();
+        for (int i = 0; i < blankSize; i++) {
             answerList.add("");
         }
     }
     BlankClickableSpan getBlankClickableSpan(int position){
         return new BlankClickableSpan(position);
     }
+
     class BlankClickableSpan extends ClickableSpan {
 
         private int position;

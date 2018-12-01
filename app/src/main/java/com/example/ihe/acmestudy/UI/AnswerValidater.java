@@ -1,8 +1,10 @@
 package com.example.ihe.acmestudy.UI;
 
+import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.example.ihe.acmestudy.Cache.Questions.QuestionForDBAgent;
+import com.example.ihe.acmestudy.UI.gapfilling.GapFillingListener;
 import com.example.ihe.acmestudy.UI.gapfilling.GapFillingView;
 
 import java.util.List;
@@ -12,10 +14,17 @@ public class AnswerValidater {
 //    AnswerValidater(List<View> pages){
 //        this.pages=pages;
 ////    }
+
     public void validateAnswer(Object listener,int type){
-//        if (listener instanceof OptionSelectedListener&&type==QuestionForDBAgent.SINGLE_CHOICE){
-//
-//        }
+        if (listener instanceof OptionSelectedListener&&type==QuestionForDBAgent.SINGLE_CHOICE){
+
+        }
+        else if (listener instanceof OptionSelectedListener&&type==QuestionForDBAgent.MULTIPLE_CHOICE){
+
+        }
+        else if (listener instanceof GapFillingListener&&type==QuestionForDBAgent.GAP_FILLING){
+
+        }
 
 
     }

@@ -27,14 +27,14 @@ public class OptionSelectedListener implements View.OnClickListener {
     private void setSelectedState(Button button, boolean selectedState){
         if (selectedState){
             if (IsSingle)
-                button.setBackgroundResource(R.drawable.circle);
+                button.setBackgroundResource(R.drawable.circle_pressed);
             else
                 button.setBackgroundResource(R.drawable.multiple_pressed_img);
             button.setTextColor(ContextCompat.getColor(AcmeContext.getContext(),R.color.colorText));
         }
         else {
             if (IsSingle)
-                button.setBackgroundResource(R.drawable.circle__pressed);
+                button.setBackgroundResource(R.drawable.circle_unpressed);
             else
                 button.setBackgroundResource(R.drawable.multiple_img);
             button.setTextColor(ContextCompat.getColor(AcmeContext.getContext(),R.color.colorPrimaryDark));
@@ -57,7 +57,7 @@ public class OptionSelectedListener implements View.OnClickListener {
         return checkingButton;
 
     }
-    private void unselectCheckedButtonWhenSingle(){
+    private void unSelectCheckedButtonWhenSingle(){
         if (CheckedId != -1) {
             checkedButton = loadedView.findViewById(CheckedId);
             if (checkedButton != null) {
@@ -68,7 +68,7 @@ public class OptionSelectedListener implements View.OnClickListener {
         }
     }
     private void onClickEventWhenSingle(){
-        unselectCheckedButtonWhenSingle();
+        unSelectCheckedButtonWhenSingle();
         if (this.checkingButton !=null){
             setSelectedState(this.checkingButton, true);
             CheckedId = checkingButton.getId();
@@ -87,7 +87,6 @@ public class OptionSelectedListener implements View.OnClickListener {
     }
     @Override
     public void onClick(View v) {
-        Log.d("#", "#onClick: "+ CheckedId);
         checkingButton=getCheckingButton(v);
         if (IsSingle){
             onClickEventWhenSingle();

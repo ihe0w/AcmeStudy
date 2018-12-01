@@ -19,7 +19,7 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_margin="9dp"
-            android:background="@drawable/circle__pressed"
+            android:background="@drawable/circle_unpressed"
             android:tag="single_button"
             android:textSize="20sp" />
 
