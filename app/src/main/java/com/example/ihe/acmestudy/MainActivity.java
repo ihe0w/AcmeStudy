@@ -6,15 +6,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.ihe.acmestudy.UI.ProblemSolveActivity;
+import com.example.ihe.acmestudy.View.ProblemSolveActivity;
+import com.example.ihe.acmestudy.View.homepage.HomePageActivity;
+
+import butterknife.BindView;
 
 
 public class MainActivity extends AppCompatActivity {
+    @BindView(R.id.home)
+    Button returnHomeBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         Button button=findViewById(R.id.button2);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +44,19 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
+        returnHomeBtn=findViewById(R.id.home);
+        returnHomeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this,HomePageActivity.class);
+                startActivity(intent);
+            }
+        });
+        initView();
+    }
+    private void initView(){
+        Intent intent=new Intent(MainActivity.this,HomePageActivity.class);
+        startActivity(intent);
     }
 }
 //                Button dbButton=findViewById(R.id.button3);

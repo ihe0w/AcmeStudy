@@ -1,6 +1,6 @@
 package com.example.ihe.acmestudy.Cache.Questions;
 
-import com.example.ihe.acmestudy.UI.gapfilling.GapFillingSpanAnswerRange;
+import com.example.ihe.acmestudy.View.gapfilling.GapFillingSpanAnswerRange;
 import org.litepal.crud.LitePalSupport;
 
 import java.util.List;
@@ -11,9 +11,6 @@ public class QuestionForDBAgent extends LitePalSupport {
     public static final int GAP_FILLING=2;
 
     private int type;
-
-//    private List<String> optionContentList;
-//    private String questionStem;
     private static int questionId=0;
 //    private List<GapFillingSpanAnswerRange> rangeList;
     //answer and answerDetail 是完全依赖于stem和optionContentList的

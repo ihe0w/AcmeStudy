@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/question_stem_container">
-        <com.example.ihe.acmestudy.UI.ChoiceQuestionView
+        <com.example.ihe.acmestudy.View.ChoiceQuestionView
             android:id="@+id/question_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

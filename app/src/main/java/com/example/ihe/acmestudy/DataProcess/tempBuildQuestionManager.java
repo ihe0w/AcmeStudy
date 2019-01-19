@@ -2,7 +2,7 @@ package com.example.ihe.acmestudy.DataProcess;
 
 import com.example.ihe.acmestudy.Cache.Questions.QuestionForDBAgent;
 import com.example.ihe.acmestudy.Cache.QuestionsPacket;
-import com.example.ihe.acmestudy.UI.gapfilling.GapFillingSpanAnswerRange;
+import com.example.ihe.acmestudy.View.gapfilling.GapFillingSpanAnswerRange;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -4,4 +4,15 @@
     <color name="colorPrimaryDark">#4e64f2</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorText">#000010</color>
+
+    <color name="font33">#333333</color>
+    <color name="font66">#666666</color>
+    <color name="font99">#999999</color>
+    <color name="white">#ffffff</color>
+    <color name="ccc">#cccccc</color>
+    <color name="red_cd0000">#cd0000</color>
+    <color name="f5">#f5f5f5</color>
+    <color name="black">#000000</color>
+    <color name="blue">#1196EE</color>
+    <color name="darkbule">#0C6EAF</color>
 </resources>
