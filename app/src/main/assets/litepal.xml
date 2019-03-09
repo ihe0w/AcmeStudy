@@ -7,16 +7,16 @@
 
     </version>
     <list>
-        <mapping class="com.example.ihe.acmestudy.Cache.Questions.QuestionForDBAgent">
+        <mapping class="com.example.ihe.acmestudy.Entity.Entity.QuestionForDBAgent">
 
         </mapping>
-        <mapping class="com.example.ihe.acmestudy.Cache.Questions.SingleChoiceQuestion">
+        <mapping class="com.example.ihe.acmestudy.Entity.Entity.SingleChoiceQuestion">
 
         </mapping>
-        <mapping class="com.example.ihe.acmestudy.Cache.Questions.MultipleChoiceQuestion">
+        <mapping class="com.example.ihe.acmestudy.Entity.Entity.MultipleChoiceQuestion">
 
         </mapping>
-        <mapping class="com.example.ihe.acmestudy.Cache.Questions.GapFillingQuestion">
+        <mapping class="com.example.ihe.acmestudy.Entity.Entity.GapFillingQuestion">
 
         </mapping>
     </list>

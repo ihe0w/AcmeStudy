@@ -13,7 +13,7 @@
         android:orientation="horizontal"
         android:weightSum="4">
 
-        <com.example.ihe.acmestudy.View.homepage.GoodsTrendSection
+        <com.example.ihe.acmestudy.Interface.homepage.GoodsTrendSection
             android:id="@+id/goodsSectionIfashion"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
             GoodsTrendSection:desc="简介一"
             GoodsTrendSection:imgRes="@drawable/qunzi">
 
-        </com.example.ihe.acmestudy.View.homepage.GoodsTrendSection>
+        </com.example.ihe.acmestudy.Interface.homepage.GoodsTrendSection>
 
         <include
             layout="@layout/divider_1px_vertical"
@@ -36,7 +36,7 @@
 
         </include>
 
-        <com.example.ihe.acmestudy.View.homepage.GoodsTrendSection
+        <com.example.ihe.acmestudy.Interface.homepage.GoodsTrendSection
             android:id="@+id/goodsSectionCWC"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
             GoodsTrendSection:desc="简介二"
             GoodsTrendSection:imgRes="@drawable/qunzi">
 
-        </com.example.ihe.acmestudy.View.homepage.GoodsTrendSection>
+        </com.example.ihe.acmestudy.Interface.homepage.GoodsTrendSection>
 
         <include
             layout="@layout/divider_1px_vertical"
@@ -59,7 +59,7 @@
 
         </include>
 
-        <com.example.ihe.acmestudy.View.homepage.GoodsTrendSection
+        <com.example.ihe.acmestudy.Interface.homepage.GoodsTrendSection
             android:id="@+id/goodsSectionqbb"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -72,13 +72,13 @@
             GoodsTrendSection:desc="简介三"
             GoodsTrendSection:imgRes="@drawable/qunzi">
 
-        </com.example.ihe.acmestudy.View.homepage.GoodsTrendSection>
+        </com.example.ihe.acmestudy.Interface.homepage.GoodsTrendSection>
 
         <include layout="@layout/divider_1px_vertical">
 
         </include>
 
-        <com.example.ihe.acmestudy.View.homepage.GoodsTrendSection
+        <com.example.ihe.acmestudy.Interface.homepage.GoodsTrendSection
             android:id="@+id/goodsSectionZqtd"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
             GoodsTrendSection:desc="简介四"
             GoodsTrendSection:imgRes="@drawable/qunzi">
 
-        </com.example.ihe.acmestudy.View.homepage.GoodsTrendSection>
+        </com.example.ihe.acmestudy.Interface.homepage.GoodsTrendSection>
     </LinearLayout>
 
     <!--<include layout="@layout/divider_1px_hor"></include>-->

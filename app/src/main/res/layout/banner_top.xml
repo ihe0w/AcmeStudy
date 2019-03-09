@@ -5,12 +5,12 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.example.ihe.acmestudy.View.homepage.FlyBanner
+    <com.example.ihe.acmestudy.Interface.homepage.FlyBanner
         android:id="@+id/bannerTop"
         android:layout_width="match_parent"
         android:layout_height="160dp"
         FlyBanner:points_position="RIGHT"
         >
 
-    </com.example.ihe.acmestudy.View.homepage.FlyBanner>
+    </com.example.ihe.acmestudy.Interface.homepage.FlyBanner>
 </LinearLayout>

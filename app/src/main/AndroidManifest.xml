@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ihe.acmestudy">
-
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".common.AcmeApplication"
@@ -16,20 +15,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Interface.ProblemSolvePage.ResultReportActivity"></activity>
+        <activity android:name=".Interface.ProblemSolvePage.ProblemSolveInterface">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.ProblemSolveActivity" />
-        <activity android:name=".View.AnswerSheetActivity" />
-        <activity android:name=".common.BaseActivity" />
+        <activity android:name=".MainActivity"></activity>
+
         <activity
-            android:name=".View.LoginActivity"
+            android:name=".Interface.LoginPage.LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".View.homepage.HomePageActivity"></activity>
+        <activity android:name=".Interface.homepage.HomePageActivity" />
     </application>
 
 </manifest>

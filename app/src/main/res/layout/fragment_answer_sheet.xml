@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     android:background="#F5F5F5"
     android:fillViewport="true"
-    android:scrollbars="none">
+ >
     <RelativeLayout
         android:id="@+id/pager_item"
         android:layout_width="match_parent"

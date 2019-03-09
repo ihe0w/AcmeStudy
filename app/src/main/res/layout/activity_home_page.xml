@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="com.example.ihe.acmestudy.View.homepage.HomePageActivity">
+    tools:context="com.example.ihe.acmestudy.Interface.homepage.HomePageActivity">
 
     <include
         android:id="@+id/includeTop"

@@ -13,4 +13,14 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="exercise_title">专项智能练习(言语理解与表达)</string>
+    <string name="question_title">常识判断</string>
+    <string name="analyze_text">解析：</string>
+    <string name="answer_rightOrNot">本题回答</string>
+    <string name="yourChooseAndrealAnswer">你选的是</string>
+    <string name="question_type">试题类型</string>
+    <string name="present_time">交卷时间</string>
 </resources>

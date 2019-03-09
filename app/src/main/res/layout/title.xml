@@ -15,7 +15,7 @@
 
         <!--android:background="@color/colorPrimary"-->
 
-        <com.example.ihe.acmestudy.View.homepage.BottomBtn
+        <com.example.ihe.acmestudy.Interface.homepage.BottomBtn
 
             android:id="@+id/buttomBtnScan"
             android:layout_width="0dp"
@@ -23,7 +23,7 @@
             android:layout_weight="0.17"
             android:gravity="center">
 
-        </com.example.ihe.acmestudy.View.homepage.BottomBtn>
+        </com.example.ihe.acmestudy.Interface.homepage.BottomBtn>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -65,13 +65,13 @@
 
         </LinearLayout>
 
-        <com.example.ihe.acmestudy.View.homepage.BottomBtn
+        <com.example.ihe.acmestudy.Interface.homepage.BottomBtn
             android:id="@+id/bomBtnMsg"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.17">
 
-        </com.example.ihe.acmestudy.View.homepage.BottomBtn>
+        </com.example.ihe.acmestudy.Interface.homepage.BottomBtn>
 
     </LinearLayout>
 

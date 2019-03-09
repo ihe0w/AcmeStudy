@@ -1,62 +1,47 @@
 package com.example.ihe.acmestudy;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.util.Log;
 
-import com.example.ihe.acmestudy.View.ProblemSolveActivity;
-import com.example.ihe.acmestudy.View.homepage.HomePageActivity;
+import com.example.ihe.acmestudy.Interface.ProblemSolvePage.ProblemSolveInterface;
+import com.example.ihe.acmestudy.common.BaseActivity;
 
-import butterknife.BindView;
+/**
+ * 判断是否登录，登录了就跳转首页，若是没有则跳转到登陆注册界面，*/
+public class MainActivity extends BaseActivity {
 
-
-public class MainActivity extends AppCompatActivity {
-    @BindView(R.id.home)
-    Button returnHomeBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-
-        Button button=findViewById(R.id.button2);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this, ProblemSolveActivity.class);
-                startActivity(intent);
-            }
-        });
-        Button button1=findViewById(R.id.send);
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        Button button2=findViewById(R.id.send_btn);
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        returnHomeBtn=findViewById(R.id.home);
-        returnHomeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this,HomePageActivity.class);
-                startActivity(intent);
-            }
-        });
-        initView();
+        Log.d("#", "initView: AAa");
+        Intent intent1=new Intent(MainActivity.this, ProblemSolveInterface.class);
+        startActivity(intent1);
+//        Intent intent=new Intent(MainActivity.this,HomePageActivity.class);
+//        Intent intent1=new Intent(MainActivity.this, ProblemSolveInterface.class);
+//        Log.d("#", "initViewend: ");
+////        startActivity(intent);        //I don't understand why ???
+//        startActivity(intent1);
     }
-    private void initView(){
-        Intent intent=new Intent(MainActivity.this,HomePageActivity.class);
-        startActivity(intent);
+
+
+
+    @Override
+    protected void initView() {
+        super.initView();
+        Log.d("#", "initView: ");
+//        Intent intent=new Intent(MainActivity.this,HomePageActivity.class);
+//        startActivity(intent);
+    }
+    @Override
+    protected void initData() {
+        super.initData();
+    }
+
+    @Override
+    protected int getContentViewId() {
+        return R.layout.activity_main;
     }
 }
 //                Button dbButton=findViewById(R.id.button3);
@@ -81,3 +66,33 @@ public class MainActivity extends AppCompatActivity {
 ////                }
 ////            }
 ////        });
+//Button button=findViewById(R.id.button2);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent=new Intent(MainActivity.this, ProblemSolveActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//        Button button1=findViewById(R.id.send);
+//        button1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+//        Button button2=findViewById(R.id.send_btn);
+//        button2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+//        returnHomeBtn=findViewById(R.id.home);
+//        returnHomeBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent=new Intent(MainActivity.this,HomePageActivity.class);
+//                startActivity(intent);
+//            }
+//        });
