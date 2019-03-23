@@ -15,15 +15,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Interface.ProblemSolvePage.ResultReportActivity"></activity>
+        <activity android:name=".Interface.drawerlayout.Drawer"></activity>
+        <activity android:name=".Interface.dropdownmenu.DropDownMenu" />
+        <activity android:name=".Interface.ProblemSolvePage.ResultReportActivity" />
         <activity android:name=".Interface.ProblemSolvePage.ProblemSolveInterface">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
-
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".Interface.LoginPage.LoginActivity"
             android:label="@string/title_activity_login" />
