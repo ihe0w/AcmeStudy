@@ -47,8 +47,6 @@ public class ChoiceQuestionView extends RecyclerView implements QuestionView {
     }
 
 
-    @Override
-    public UserAnswer getUserAnswer() {
-        return null;
-    }
+
+
 }

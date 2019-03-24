@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.ihe.acmestudy.Interface.ProblemSolvePage.ProblemSolveInterface;
+import com.example.ihe.acmestudy.Interface.ProblemSolvePage.ProblemSolveActivity;
 import com.example.ihe.acmestudy.common.BaseActivity;
 
 /**
@@ -16,10 +16,10 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d("#", "initView: AAa");
-        Intent intent1=new Intent(MainActivity.this, ProblemSolveInterface.class);
+        Intent intent1=new Intent(MainActivity.this, ProblemSolveActivity.class);
         startActivity(intent1);
 //        Intent intent=new Intent(MainActivity.this,HomePageActivity.class);
-//        Intent intent1=new Intent(MainActivity.this, ProblemSolveInterface.class);
+//        Intent intent1=new Intent(MainActivity.this, ProblemSolveActivity.class);
 //        Log.d("#", "initViewend: ");
 ////        startActivity(intent);        //I don't understand why ???
 //        startActivity(intent1);

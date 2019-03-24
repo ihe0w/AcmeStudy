@@ -1,4 +1,4 @@
-package com.example.ihe.acmestudy.Interface.gapfilling;
+package com.example.ihe.acmestudy.Interface.ProblemSolvePage.gapfilling;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -13,9 +13,9 @@ import android.view.LayoutInflater;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.ihe.acmestudy.Interface.ProblemSolvePage.ProblemSolveActivity;
 import com.example.ihe.acmestudy.R;
 import com.example.ihe.acmestudy.common.QuestionView;
-import com.example.ihe.acmestudy.Interface.ProblemSolvePage.UserAnswer;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ public class GapFillingView extends RelativeLayout implements QuestionView {
     List<GapFillingSpanAnswerRange> rangeList;
     // 填空题内容
     SpannableStringBuilder gapFillingQuestionContent;
-    GapFillingListener gapFillingListener;
+    static GapFillingListener gapFillingListener;
 
     public GapFillingView(Context context) {
         this(context, null);
@@ -81,6 +81,9 @@ public class GapFillingView extends RelativeLayout implements QuestionView {
 //            answerList.add("");
 //        }
         gapFillingListener=new GapFillingListener(this);
+//        if (ProblemSolveActivity.getWhichActivity()==ProblemSolveActivity.PAA){
+//            gapFillingListener.setUserAnswers(ProblemSolveActivity.);
+//        }
 
         // 设置填空处点击事件及设置gapFillingQuestionContent的span
         for (int i = 0; i < rangeList.size(); i++) {
@@ -95,7 +98,7 @@ public class GapFillingView extends RelativeLayout implements QuestionView {
         gapFillingStemView.setText(gapFillingQuestionContent);
     }
     public List<String> getAnswerList() {
-        return answerList;
+        return gapFillingListener.getAnswerList();
     }
     int dp2px(float dp) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
@@ -108,10 +111,7 @@ public class GapFillingView extends RelativeLayout implements QuestionView {
 
     }
 
-    @Override
-    public UserAnswer getUserAnswer() {
-        return null;
-    }
+
 }
 
 

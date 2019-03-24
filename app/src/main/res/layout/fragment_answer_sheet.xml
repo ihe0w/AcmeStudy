@@ -1,10 +1,12 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F5F5"
-    android:fillViewport="true"
- >
-    <RelativeLayout
+    android:fillViewport="true">
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/pager_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -13,13 +15,15 @@
             android:id="@+id/paper_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:background="#D9D7CA"
             android:orientation="horizontal"
             android:paddingLeft="10dp"
             android:paddingTop="15dp"
             android:paddingRight="10dp"
-            android:paddingBottom="15dp">
+            android:paddingBottom="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/tv_paper_name"
@@ -31,16 +35,18 @@
 
         <LinearLayout
             android:id="@+id/tv_description_container"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/paper_container"
-            android:layout_gravity="center_vertical"
+            android:layout_marginTop="52dp"
             android:background="#F5F5F5"
             android:orientation="horizontal"
             android:paddingLeft="10dp"
             android:paddingTop="15dp"
             android:paddingRight="10dp"
-            android:paddingBottom="15dp">
+            android:paddingBottom="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
 
@@ -59,12 +65,19 @@
 
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_description_container"
-            android:layout_margin="10dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginLeft="9dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="9dp"
+            android:layout_marginRight="9dp"
             android:background="@color/black"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_description_container">
 
             <com.example.ihe.acmestudy.Interface.ProblemSolvePage.NoScrollGridView
                 android:id="@+id/gridview"
@@ -82,16 +95,52 @@
             </com.example.ihe.acmestudy.Interface.ProblemSolvePage.NoScrollGridView>
 
         </LinearLayout>
-        <RelativeLayout
-            android:background="@color/blue"
+
+        <LinearLayout
+            android:id="@+id/commit_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true">
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
             <TextView
                 android:id="@+id/tv_submit_result"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#0094ff"
+                android:gravity="center"
+                android:paddingTop="17dp"
+                android:paddingBottom="17dp"
+                android:text="交卷并查看结果"
+                android:textColor="@android:color/white"
+                android:textSize="17sp" />
+
+        </LinearLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</ScrollView>
+<!--     <RelativeLayout
+            android:id="@+id/commit_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:background="@color/blue"
+            app:layout_constraintStart_toStartOf="parent"
+            android:padding="5dp"
+            >
+
+            <TextView
+                android:id="@+id/tv_submit_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="36dp"
                 android:layout_marginBottom="2dp"
                 android:background="#0094ff"
                 android:gravity="center"
@@ -100,8 +149,4 @@
                 android:text="交卷并查看结果"
                 android:textColor="@android:color/white"
                 android:textSize="17sp" />
-        </RelativeLayout>
-
-
-    </RelativeLayout>
-</ScrollView>
+        </RelativeLayout>-->

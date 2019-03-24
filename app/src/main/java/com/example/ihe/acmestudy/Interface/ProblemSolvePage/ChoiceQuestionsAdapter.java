@@ -25,7 +25,7 @@ public class ChoiceQuestionsAdapter extends RecyclerView.Adapter<ChoiceQuestions
     private  int optionId =1; //单选按钮id
     private OptionSelectedListener optionSelectedListener;
     public ChoiceQuestionsAdapter(int type, List<String> optionContentList, RecyclerView recyclerView) {
-        Log.d("#", "QL start");
+//        Log.d("#", "QL start");
         this.type = type;
         this.optionContentList =optionContentList;
         loadedView=recyclerView;     //?我很不想把RV直接传进去，但我现在不知道还有什么更好的办法没有
@@ -36,11 +36,6 @@ public class ChoiceQuestionsAdapter extends RecyclerView.Adapter<ChoiceQuestions
         else if (type==QuestionInfo.MULTIPLE_CHOICE){
             optionSelectedListener=new OptionSelectedListener(false,loadedView,getItemCount());
         }
-//        else if (type==QuestionForDBAgent.GAP_FILLING){
-//
-//        }
-        Log.d("#", "QL end");
-
     }
 
     static class QuestionHolder extends RecyclerView.ViewHolder {
@@ -49,17 +44,17 @@ public class ChoiceQuestionsAdapter extends RecyclerView.Adapter<ChoiceQuestions
         CardView itemOptionCard;
         QuestionHolder(View itemView) {
             super(itemView);
-            Log.d("#", "QH start");
+//            Log.d("#", "QH start");
             button = itemView.findViewById(R.id.option);
             optionContentView = itemView.findViewById(R.id.option_content);
             itemOptionCard=itemView.findViewById(R.id.single_choice_card);
-            Log.d("#", "QH end");
+//            Log.d("#", "QH end");
         }
     }
     @NonNull
     @Override
     public QuestionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d("#", "onCreateViewHolder: ");
+//        Log.d("#", "onCreateViewHolder: ");
         View view=null;
         if (type==QuestionInfo.SINGLE_CHOICE) {
              view = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_choice_question_layout, parent, false);
@@ -67,8 +62,8 @@ public class ChoiceQuestionsAdapter extends RecyclerView.Adapter<ChoiceQuestions
         else if (type==QuestionInfo.MULTIPLE_CHOICE){
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.multiple_choice_question_layout, parent, false);
         }
-        if (view==null)
-            Log.d("#", "onCreateViewHolder: null view");
+//        if (view==null)
+//            Log.d("#", "onCreateViewHolder: null view");
         return new QuestionHolder(view);
     }
 
@@ -85,7 +80,7 @@ public class ChoiceQuestionsAdapter extends RecyclerView.Adapter<ChoiceQuestions
     public int getItemCount() {
         return optionContentList.size();
     }
-    OptionSelectedListener getOptionSelectedListener(){
+    public OptionSelectedListener getOptionSelectedListener(){
         return optionSelectedListener;
     }
         //为button设置单选功能
@@ -101,6 +96,12 @@ public class ChoiceQuestionsAdapter extends RecyclerView.Adapter<ChoiceQuestions
             optionContentView.setOnClickListener(optionSelectedListener);
             itemOptionCard.setOnClickListener(optionSelectedListener);
         }
+    public int getAnswerId(){
+        return optionSelectedListener.getAnswerId();
+    }
+    public boolean[] getMultipleCheckedIds(){
+        return optionSelectedListener.getMultipleCheckedIds();
+    }
 
 
 

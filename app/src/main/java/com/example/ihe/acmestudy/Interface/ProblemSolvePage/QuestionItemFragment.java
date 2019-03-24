@@ -4,16 +4,16 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.ihe.acmestudy.Interface.gapfilling.GapFillingSpanAnswerRange;
-import com.example.ihe.acmestudy.Interface.gapfilling.GapFillingView;
+import com.example.ihe.acmestudy.Interface.ProblemSolvePage.gapfilling.GapFillingSpanAnswerRange;
+import com.example.ihe.acmestudy.Interface.ProblemSolvePage.gapfilling.GapFillingView;
 import com.example.ihe.acmestudy.Entity.Entity.GapFillingQuestion;
 import com.example.ihe.acmestudy.Entity.Entity.MultipleChoiceQuestion;
 import com.example.ihe.acmestudy.Entity.Entity.QuestionInfo;
@@ -36,14 +36,16 @@ public class QuestionItemFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_INDEX = "index";
-    private static final String ARG_QUESTIONINFO="questionInfo";
 
     // TODO: Rename and change types of parameters
     private int index;
     private QuestionInfo questionInfo;
+    private int type;
 
     private OnFragmentInteractionListener mListener;
-    private LocalBroadcastManager mLocalBroadcastManager;
+    private  View rootView;
+    ChoiceQuestionsAdapter choiceQuestionsAdapter;
+    GapFillingView gapFillingView;
 
     public QuestionItemFragment() {
         // Required empty public constructor
@@ -65,21 +67,31 @@ public class QuestionItemFragment extends Fragment {
         return fragment;
     }
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initData();
+    }
+    private void initData(){
         if (getArguments() != null) {
             index = getArguments().getInt(ARG_INDEX);
-//            questionInfo=(QuestionInfo) getArguments().getSerializable(ARG_QUESTIONINFO);
-            questionInfo= ProblemSolveInterface.questionInfos.get(index);
+            questionInfo= ProblemSolveActivity.questionInfos.get(index);
+            type=questionInfo.getType();
         }
-
     }
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mLocalBroadcastManager = LocalBroadcastManager.getInstance(getActivity());
+        inflaterRootView(inflater,container);
+        ConstraintLayout constraintLayout=rootView.findViewById(R.id.question_item_fragment_layout);
+        constraintLayout.addView(initQuestionView());
+        return rootView;
+    }
+    private View initQuestionView(){
         View questionView=null;
 
         if (questionInfo.getType()==QuestionInfo.SINGLE_CHOICE){
@@ -95,27 +107,23 @@ public class QuestionItemFragment extends Fragment {
             questionView=createAndLoadIntoGapFillingView(gapFillingQuestion.getQuestionStem(),gapFillingQuestion.getRangeList());
         }
         return questionView;
-
-//        View rootView = inflater.inflate(R.layout.questions_container_layout,
-//                container, false);
-
-
-        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.questions_container_layout,
-//            container, false);
+    }
+    protected void inflaterRootView(@NonNull LayoutInflater inflater, ViewGroup container){
+        rootView = inflater.inflate(R.layout.fragment_question_item,
+                container, false);
     }
 
     private View createAndLoadIntoChoiceView(int type, String questionStemContent, List<String> optionContentList){
-        View view= LayoutInflater.from(getContext()).inflate(R.layout.questions_container_layout,null);
+        View view= LayoutInflater.from(getContext()).inflate(R.layout.choice_questions_container_layout,null);
         if (view!=null) {
             TextView questionStemView=view.findViewById(R.id.stem_view);
             if (questionStemView!=null){
                 questionStemView.setText(questionStemContent);
             }
 
-            ChoiceQuestionView choiceQuestionView = view.findViewById(R.id.question_container);
+            ChoiceQuestionView choiceQuestionView = view.findViewById(R.id.choice_question_view);
             choiceQuestionView.setType(type);
-            ChoiceQuestionsAdapter choiceQuestionsAdapter = new ChoiceQuestionsAdapter(type, optionContentList, choiceQuestionView);
+            choiceQuestionsAdapter = new ChoiceQuestionsAdapter(type, optionContentList, choiceQuestionView);
             //TODO:setLayoutManager
             choiceQuestionView.setLayoutManager(new LinearLayoutManager(AcmeApplication.getContext()));
             choiceQuestionView.setAdapter(choiceQuestionsAdapter);}
@@ -123,11 +131,16 @@ public class QuestionItemFragment extends Fragment {
     }
     private View createAndLoadIntoGapFillingView(String gapFillingQuestionStem,List<GapFillingSpanAnswerRange> rangeList){
         View view=  LayoutInflater.from(getContext()).inflate(R.layout.gap_filling_layout,null);
-        GapFillingView gapFillingView =view.findViewById(R.id.gap_filling_view);
+        gapFillingView=view.findViewById(R.id.gap_filling_view);
         gapFillingView.loadQuestionContent(gapFillingQuestionStem, rangeList);
         return view;
 
     }
+
+    public int getType() {
+        return type;
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -167,4 +180,14 @@ public class QuestionItemFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+    public int getAnswerId(){
+        return choiceQuestionsAdapter.getAnswerId();
+    }
+    public boolean[] getMultipleCheckedIds(){
+        return choiceQuestionsAdapter.getMultipleCheckedIds();
+    }
+    public List<String> getAnswerList() {
+        return gapFillingView.getAnswerList();
+    }
+
 }

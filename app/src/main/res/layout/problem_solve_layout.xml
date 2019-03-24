@@ -85,7 +85,7 @@
     <!--</android.support.v7.widget.CardView>-->
 
     <!--<include-->
-    <!--layout="@layout/questions_container_layout"-->
+    <!--layout="@layout/choice_questions_container_layout"-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="wrap_content"-->
     <!--android:layout_gravity="bottom"-->
