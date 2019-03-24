@@ -12,10 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.support.v4.content.LocalBroadcastManager;
-import android.view.Gravity;
 import android.view.View.OnClickListener;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -39,7 +36,7 @@ public class AnswerSheetFragment extends Fragment {
     LocalBroadcastManager mLocalBroadcastManager;
     private String mParam1;
     private String mParam2;
-    int count = ProblemSolveInterface.packetSize;
+    int count = ProblemSolveActivity.packetSize;
     int[] mIds = new int[count];
 
     private OnFragmentInteractionListener mListener;
@@ -87,29 +84,23 @@ public class AnswerSheetFragment extends Fragment {
                 container, false);
         NoScrollGridView noScrollGridView = rootView.findViewById(R.id.gridview);
         TextView tv_submit_result =  rootView.findViewById(R.id.tv_submit_result);
-        tv_submit_result.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(),ResultReportActivity.class);
-//                startActivity(intent);
+        tv_submit_result.setOnClickListener(v -> {
 
-            }
+            Intent intent = new Intent(getActivity(),ResultReportActivity.class);
+            startActivity(intent);
+
         });
         Log.d("#", "onCreateView: find view");
 
-        AnswerSheetFragment.MyAdapter adapter = new AnswerSheetFragment.MyAdapter(getActivity());
+        GridViewAdapter adapter = new GridViewAdapter(getActivity());
         noScrollGridView.setAdapter(adapter);
         Log.d("#", "onCreateView: adapter");
 
-        noScrollGridView.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                // TODO:跳转到相应的viewpager 页面
-                Intent intent = new Intent("com.ihe.jumptopage");
-                intent.putExtra("index", position);
-                mLocalBroadcastManager.sendBroadcast(intent);
-            }
+        noScrollGridView.setOnItemClickListener((parent, view, position, id) -> {
+            // TODO:跳转到相应的viewpager 页面
+            Intent intent = new Intent("com.ihe.jumptopage");
+            intent.putExtra("index", position);
+            mLocalBroadcastManager.sendBroadcast(intent);
         });
         return rootView;
     }
@@ -119,43 +110,44 @@ public class AnswerSheetFragment extends Fragment {
         }
     }
 
-    private class MyAdapter extends BaseAdapter {
-        private Context mContext;
-
-        MyAdapter(Context context) {
-            this.mContext = context;
-        }
-
-        @Override
-        public int getCount() {
-            return mIds.length;
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return mIds[position];
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            Log.d("#", "getView: ");
-            TextView tv = new TextView(mContext);
-            tv.setGravity(Gravity.CENTER);
-            tv.setLayoutParams(new GridView.LayoutParams(70, 70));
-            tv.setPadding(8, 8, 8, 8);
-
-            tv.setText(mIds[position] + "");
-            tv.setBackgroundResource(R.drawable.circle_pressed);
-            Log.d("#", "getView: end ");
-            return tv;
-        }
-
-    }
+//    private class MyAdapter extends BaseAdapter {
+//        private Context mContext;
+//
+//        MyAdapter(Context context) {
+//            this.mContext = context;
+//        }
+//
+//        @Override
+//        public int getCount() {
+//            return mIds.length;
+//        }
+//
+//        @Override
+//        public Object getItem(int position) {
+//            return mIds[position];
+//        }
+//
+//        @Override
+//        public long getItemId(int position) {
+//            return 0;
+//        }
+//
+//        @Override
+//        public View getView(int position, View convertView, ViewGroup parent) {
+//            Log.d("#", "getView: ");
+//            TextView tv = new TextView(mContext);
+//            tv.setGravity(Gravity.CENTER);
+//            tv.setLayoutParams(new GridView.LayoutParams(70, 70));
+//            tv.setPadding(8, 8, 8, 8);
+//            tv.setTextColor(getResources().getColor(R.color.white));
+//
+//            tv.setText(mIds[position] + "");
+//            tv.setBackgroundResource(R.drawable.circle_pressed);
+//            Log.d("#", "getView: end ");
+//            return tv;
+//        }
+//
+//    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

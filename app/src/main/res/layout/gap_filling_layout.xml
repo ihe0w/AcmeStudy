@@ -5,11 +5,11 @@
     android:id="@+id/gap_filling_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<com.example.ihe.acmestudy.Interface.gapfilling.GapFillingView
+<com.example.ihe.acmestudy.Interface.ProblemSolvePage.gapfilling.GapFillingView
     android:id="@+id/gap_filling_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</com.example.ihe.acmestudy.Interface.gapfilling.GapFillingView>
+</com.example.ihe.acmestudy.Interface.ProblemSolvePage.gapfilling.GapFillingView>
 
 </RelativeLayout>

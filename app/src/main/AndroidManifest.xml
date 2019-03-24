@@ -16,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Interface.ProblemSolvePage.ResultReportActivity"></activity>
-        <activity android:name=".Interface.ProblemSolvePage.ProblemSolveInterface">
+        <activity android:name=".Interface.ProblemSolvePage.ProblemSolveActivity"
+            android:launchMode="standard"
+           >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

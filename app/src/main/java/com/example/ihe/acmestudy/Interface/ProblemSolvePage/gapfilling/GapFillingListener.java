@@ -1,4 +1,4 @@
-package com.example.ihe.acmestudy.Interface.gapfilling;
+package com.example.ihe.acmestudy.Interface.ProblemSolvePage.gapfilling;
 
 import android.content.Context;
 import android.graphics.drawable.PaintDrawable;
@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
+import com.example.ihe.acmestudy.Interface.ProblemSolvePage.ProblemSolveActivity;
 import com.example.ihe.acmestudy.R;
 
 import java.util.ArrayList;
@@ -28,17 +29,24 @@ public class GapFillingListener {
     private Context context;
     private List<String> answerList;
     private int blankSize;
-    GapFillingListener(GapFillingView gapFillingView){
+    public GapFillingListener(GapFillingView gapFillingView){
         this.gapFillingView = gapFillingView;
         context= gapFillingView.context;
         answerList = new ArrayList<>();
         blankSize=gapFillingView.rangeList.size();
-        for (int i = 0; i < blankSize; i++) {
-            answerList.add("");
+        if (ProblemSolveActivity.getWhichActivity()==ProblemSolveActivity.PSA) {
+            for (int i = 0; i < blankSize; i++) {
+                answerList.add("");
+            }
         }
+
+
     }
     BlankClickableSpan getBlankClickableSpan(int position){
         return new BlankClickableSpan(position);
+    }
+    public void setUserAnswers(List<String> userAnswers){
+        answerList=userAnswers;
     }
 
     class BlankClickableSpan extends ClickableSpan {
@@ -57,37 +65,45 @@ public class GapFillingListener {
             Button btnFillBlank = (Button) view.findViewById(R.id.btn_fill_blank);
 
             // 显示原有答案
+            showOrignalAnswer(etInput);
+            if (ProblemSolveActivity.getWhichActivity()==ProblemSolveActivity.PSA) {
+                //弹出键盘让用户输入答案
+                final PopupWindow popupWindow = new PopupWindow(view, RelativeLayout.LayoutParams.MATCH_PARENT, gapFillingView.dp2px(40));
+                // 获取焦点
+                popupWindow.setFocusable(true);
+                // 为了防止弹出菜单获取焦点之后，点击Activity的其他组件没有响应
+                popupWindow.setBackgroundDrawable(new PaintDrawable());
+                // 设置PopupWindow在软键盘的上方
+                popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+                // 弹出PopupWindow
+                popupWindow.showAtLocation(gapFillingView, Gravity.BOTTOM, 0, 0);
+
+                btnFillBlank.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // 填写答案
+                        String answer = etInput.getText().toString();
+                        fillAnswer(answer, position);
+                        popupWindow.dismiss();
+                    }
+                });
+
+                // 显示软键盘
+                InputMethodManager inputMethodManager =
+                        (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                assert inputMethodManager != null;
+                inputMethodManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+            }else {
+                //TODO:I need a window to show answer and analyze;besides that,I also should have to indicate whether wrong or right!
+            }
+        }
+
+        private void showOrignalAnswer(EditText etInput){
             String oldAnswer = answerList.get(position);
             if (!TextUtils.isEmpty(oldAnswer)) {
                 etInput.setText(oldAnswer);
                 etInput.setSelection(oldAnswer.length());
             }
-            //弹出键盘让用户输入答案
-            final PopupWindow popupWindow = new PopupWindow(view, RelativeLayout.LayoutParams.MATCH_PARENT, gapFillingView.dp2px(40));
-            // 获取焦点
-            popupWindow.setFocusable(true);
-            // 为了防止弹出菜单获取焦点之后，点击Activity的其他组件没有响应
-            popupWindow.setBackgroundDrawable(new PaintDrawable());
-            // 设置PopupWindow在软键盘的上方
-            popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-            // 弹出PopupWindow
-            popupWindow.showAtLocation(gapFillingView, Gravity.BOTTOM, 0, 0);
-
-            btnFillBlank.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // 填写答案
-                    String answer = etInput.getText().toString();
-                    fillAnswer(answer, position);
-                    popupWindow.dismiss();
-                }
-            });
-
-            // 显示软键盘
-            InputMethodManager inputMethodManager =
-                    (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-            assert inputMethodManager != null;
-            inputMethodManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
         }
 
         @Override
@@ -138,6 +154,10 @@ public class GapFillingListener {
             }
         }
 
+    }
+
+    public List<String> getAnswerList() {
+        return answerList;
     }
 }
 

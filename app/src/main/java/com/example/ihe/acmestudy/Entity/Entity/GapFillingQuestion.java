@@ -1,6 +1,6 @@
 package com.example.ihe.acmestudy.Entity.Entity;
 
-import com.example.ihe.acmestudy.Interface.gapfilling.GapFillingSpanAnswerRange;
+import com.example.ihe.acmestudy.Interface.ProblemSolvePage.gapfilling.GapFillingSpanAnswerRange;
 
 import java.util.List;
 
